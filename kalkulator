@@ -1,0 +1,99 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+// Pamiec (akumulator)
+double memory = 0;
+bool memory_used = false;
+
+// Dzialania
+
+double dodaj(double a, double b) { return a + b; }
+double odejmij(double a, double b) { return a - b; }
+double razy(double a, double b) { return a * b; }
+
+double dziel(double a, double b) {
+    if (b != 0) return a / b;
+    cout << "B nie moze byc 0" << endl;
+    return 0;
+}
+
+double modulo(double a, double b) {
+    if (b != 0) return fmod(a, b);
+    cout << "B nie moze byc 0" << endl;
+    return 0;
+}
+
+// Zapisywanie pamieci
+void zapis(double value) {
+    memory = value;
+    memory_used = true;
+}
+
+double pobierz_zapis() {
+    if (memory_used) return memory;
+    cout << "Brak zapisanej wartosci" << endl;
+    return 0;
+}
+
+void wyczysc_zapis() {
+    memory = 0;
+    memory_used = false;
+}
+
+// Menu
+void kalkulator() {
+    while (true) {
+        cout << "\nKalkulator:\n 1. Dodawanie\n 2. Odejmowanie\n 3. Mnozenie\n 4. Dzielenie\n 5. modulo\n 6. Pamiec - zapis\n 7. Pamiec - wyczysc\n 8. Pamiec - odczyt\n 0. Wyjscie\n Wybierz opcje: ";
+        int opcja;
+        cin >> opcja;
+
+        if (opcja == 0) break;
+
+        double a, b;
+        switch (opcja) {
+            case 1:
+                cout << "Podaj dwie liczby: "; cin >> a >> b;
+                zapis(dodaj(a, b));
+                cout << "Wynik: " << pobierz_zapis() << endl;
+                break;
+            case 2:
+                cout << "Podaj dwie liczby: "; cin >> a >> b;
+                zapis(odejmij(a, b));
+                cout << "Wynik: " << pobierz_zapis() << endl;
+                break;
+            case 3:
+                cout << "Podaj dwie liczby: "; cin >> a >> b;
+                zapis(razy(a, b));
+                cout << "Wynik: " << pobierz_zapis() << endl;
+                break;
+            case 4:
+                cout << "Podaj dwie liczby: "; cin >> a >> b;
+                zapis(dziel(a, b));
+                cout << "Wynik: " << pobierz_zapis() << endl;
+                break;
+            case 5:
+                cout << "Podaj dwie liczby: "; cin >> a >> b;
+                zapis(modulo(a, b));
+                cout << "Wynik: " << pobierz_zapis() << endl;
+                break;
+            case 6:
+                cout << "Podaj liczbe do zapisania w pamieci: "; cin >> a;
+                zapis(a);
+                break;
+            case 7:
+                wyczysc_zapis();
+                break;
+            case 8:
+                cout << "Pamiec: " << pobierz_zapis() << endl;
+                 break;
+            default:
+                cout << "Wybrales zla liczbe" << endl;
+        }
+    }
+}
+
+int main() {
+    kalkulator();
+    return 0;
+}
