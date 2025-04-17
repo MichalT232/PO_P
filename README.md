@@ -1,4 +1,4 @@
-#Kalkulator
+# Kalkulator
 
 ###Autor: Michał Tasior 
 ###Nr. indeksu: 287179
