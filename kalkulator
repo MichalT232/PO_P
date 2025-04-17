@@ -2,98 +2,124 @@
 #include <cmath>
 using namespace std;
 
-// Pamiec (akumulator)
-double memory = 0;
-bool memory_used = false;
+class Kalkulator {
+private:
+double memory;
+bool memory_used;
 
-// Dzialania
+public:
+
+Kalkulator() : memory(0), memory_used(false) {}
+
 
 double dodaj(double a, double b) { return a + b; }
 double odejmij(double a, double b) { return a - b; }
 double razy(double a, double b) { return a * b; }
 
 double dziel(double a, double b) {
-    if (b != 0) return a / b;
-    cout << "B nie moze byc 0" << endl;
-    return 0;
+if (b == 0) {
+cout << "B nie moze byc 0";
+return 0;
+}
+return a / b;
 }
 
 double modulo(double a, double b) {
-    if (b != 0) return fmod(a, b);
-    cout << "B nie moze byc 0" << endl;
-    return 0;
+if (b == 0) {
+cout << "B nie moze byc 0";
+return 0;
+}
+return fmod(a, b);
 }
 
-// Zapisywanie pamieci
-void zapis(double value) {
-    memory = value;
-    memory_used = true;
+
+void ustawpamiec(double value) {
+memory = value;
+memory_used = true;
 }
 
-double pobierz_zapis() {
-    if (memory_used) return memory;
-    cout << "Brak zapisanej wartosci" << endl;
-    return 0;
+double pobierzpamiec() {
+if (memory_used) {
+return memory;
+}
+cout << "Brak zapisanej wartosci";
+return 0;
 }
 
-void wyczysc_zapis() {
-    memory = 0;
-    memory_used = false;
+void wyczyscpamiec() {
+memory = 0;
+memory_used = false;
+cout << "Pamiec zostala wyczyszczona";
 }
 
-// Menu
-void kalkulator() {
-    while (true) {
-        cout << "\nKalkulator:\n 1. Dodawanie\n 2. Odejmowanie\n 3. Mnozenie\n 4. Dzielenie\n 5. modulo\n 6. Pamiec - zapis\n 7. Pamiec - wyczysc\n 8. Pamiec - odczyt\n 0. Wyjscie\n Wybierz opcje: ";
-        int opcja;
-        cin >> opcja;
 
-        if (opcja == 0) break;
+void start() {
+int opcja;
+double a, b;
 
-        double a, b;
-        switch (opcja) {
-            case 1:
-                cout << "Podaj dwie liczby: "; cin >> a >> b;
-                zapis(dodaj(a, b));
-                cout << "Wynik: " << pobierz_zapis() << endl;
-                break;
-            case 2:
-                cout << "Podaj dwie liczby: "; cin >> a >> b;
-                zapis(odejmij(a, b));
-                cout << "Wynik: " << pobierz_zapis() << endl;
-                break;
-            case 3:
-                cout << "Podaj dwie liczby: "; cin >> a >> b;
-                zapis(razy(a, b));
-                cout << "Wynik: " << pobierz_zapis() << endl;
-                break;
-            case 4:
-                cout << "Podaj dwie liczby: "; cin >> a >> b;
-                zapis(dziel(a, b));
-                cout << "Wynik: " << pobierz_zapis() << endl;
-                break;
-            case 5:
-                cout << "Podaj dwie liczby: "; cin >> a >> b;
-                zapis(modulo(a, b));
-                cout << "Wynik: " << pobierz_zapis() << endl;
-                break;
-            case 6:
-                cout << "Podaj liczbe do zapisania w pamieci: "; cin >> a;
-                zapis(a);
-                break;
-            case 7:
-                wyczysc_zapis();
-                break;
-            case 8:
-                cout << "Pamiec: " << pobierz_zapis() << endl;
-                 break;
-            default:
-                cout << "Wybrales zla liczbe" << endl;
-        }
-    }
+while (true) {
+cout << "\nKalkulator:\n";
+cout << "1. Dodawanie\n";
+cout << "2. Odejmowanie\n";
+cout << "3. Mnozenie\n";
+cout << "4. Dzielenie\n";
+cout << "5. Modulo\n";
+cout << "6. Pamiec - zapis\n";
+cout << "7. Pamiec - wyczysc\n";
+cout << "8. Pamiec - odczyt\n";
+cout << "0. Wyjscie\n";
+cout << "Wybierz opcje: ";
+cin >> opcja;
+
+if (opcja == 0) break;
+
+switch (opcja) {
+case 1:
+cout << "Podaj dwie liczby: "; cin >> a >> b;
+ustawpamiec(dodaj(a, b));
+cout << "Wynik: " << pobierzpamiec();
+break;
+case 2:
+cout << "Podaj dwie liczby: "; cin >> a >> b;
+ustawpamiec(odejmij(a, b));
+cout << "Wynik: " << pobierzpamiec();
+break;
+case 3:
+cout << "Podaj dwie liczby: "; cin >> a >> b;
+ustawpamiec(razy(a, b));
+cout << "Wynik: " << pobierzpamiec();
+break;
+case 4:
+cout << "Podaj dwie liczby: "; cin >> a >> b;
+ustawpamiec(dziel(a, b));
+cout << "Wynik: " << pobierzpamiec();
+break;
+case 5:
+cout << "Podaj dwie liczby: "; cin >> a >> b;
+ustawpamiec(modulo(a, b));
+cout << "Wynik: " << pobierzpamiec();
+break;
+case 6:
+cout << "Podaj liczbe do zapisania w pamieci: "; cin >> a;
+ustawpamiec(a);
+cout << "Wartosc zapisana w pamieci";
+break;
+case 7:
+wyczyscpamiec();
+break;
+case 8:
+cout << "Pamiec: " << pobierzpamiec();
+break;
+default:
+cout << "Nieprawidlowa opcja, sprobuj ponownie";
 }
+}
+}
+};
+
 
 int main() {
-    kalkulator();
-    return 0;
+Kalkulator kalkulator;
+kalkulator.start();
+return 0;
 }
