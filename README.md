@@ -21,6 +21,35 @@ Obsługa błędów
 ## Uruchomienie:
 Włączasz plik klakulator.exe 2 razy PPM i aplikacja się otwiera. 
 
+## Kawałek kodu c++:
+class Kalkulator {
+private:
+double memory;
+bool memory_used;
 
+public:
+
+Kalkulator() : memory(0), memory_used(false) {}
+
+
+double dodaj(double a, double b) { return a + b; }
+double odejmij(double a, double b) { return a - b; }
+double razy(double a, double b) { return a * b; }
+
+double dziel(double a, double b) {
+if (b == 0) {
+cout << "B nie moze byc 0";
+return 0;
+}
+return a / b;
+}
+
+double modulo(double a, double b) {
+if (b == 0) {
+cout << "B nie moze byc 0";
+return 0;
+}
+return fmod(a, b);
+}
 
 
